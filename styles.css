@@ -1,0 +1,40 @@
+/*
+ * Based on "Hexagons and Beyond: Flexible, Responsive Grid Patterns, Sans Media Queries" by Temani Afif from 
+ * https://css-tricks.com/hexagons-and-beyond-flexible-responsive-grid-patterns-sans-media-queries/
+ */
+
+.main {
+    display: flex;
+    
+    /* number variables */
+    --size: 100px;
+    --vert-margin: 4px;
+    --ratio: 0.8660254037844386467637231707; /* sqrt(3) / 2 */
+
+    /* calculated variables */ 
+    --horiz-margin: calc(var(--vert-margin) + 0.25 * var(--size));
+    --row-height: calc(var(--size) + 4 * var(--vert-margin));
+}
+
+.container {
+    font-size: 0;
+}
+
+.container::before {
+    content: "";
+    width: calc(var(--size) / 2 + var(--horiz-margin));
+    float: left;
+    height: 120%;
+    shape-outside: repeating-linear-gradient(#0000 0 calc(var(--row-height) - 3px), #000 0 var(--row-height));
+}
+
+.container .hex {
+    width: var(--size);
+    margin: var(--vert-margin) var(--horiz-margin);
+    height: calc(var(--size) * var(--ratio));
+    display: inline-block;
+    font-size: inital;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    margin-bottom: calc(var(--vert-margin) - var(--size) * 0.5);
+    background: #feeba5;
+}
